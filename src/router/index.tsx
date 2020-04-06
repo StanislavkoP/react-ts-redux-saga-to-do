@@ -1,21 +1,54 @@
-import React, { Component, Suspense } from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
-import { history } from '../redux/store';
-import Fallback from '../components/common/fallback';
+import React, {Suspense, useMemo} from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router'
+import { history } from 'redux/store';
+import { useTypedSelector } from 'redux/rootReducer';
+import PrivateRoute from "hoc/PrivateRoute";
+import { HeaderContainer } from "containers/HeaderContainer/HeaderContainer";
+import Fallback from 'components/common/fallback';
+import { SignIn } from "pages/Auth/SignIn/SignIn";
+import { SignUp } from "pages/Auth/SignUp/SignUp";
+import {ResetPassword} from "pages/Auth/ResetPassword/ResetPassword";
+import { Dashboard } from "../pages/Main/Dashboard/Dashboard";
 
-const HomePage = React.lazy(() => import('../pages/home'));
+const HomePage = React.lazy(() => import('pages/home'));
 
-export default class MainRouter extends Component {
+function MainRouter(props: any) {
+    const auth = useTypedSelector(state => state.authReducer);
 
-    render() {
-        return (
-            <Router history={history}>
-                <Suspense fallback={<Fallback />}>
-                    <Switch>
-                        <Route path="/" component={HomePage} />
-                    </Switch>
-                </Suspense>
-            </Router>
+    const routes = useMemo(() => {
+        let content = (
+            <>
+                <Route path='/signin' component={SignIn} />
+                <Route path='/signup' component={SignUp} />
+                <Route path='/resetpass' component={ResetPassword} />
+                <Redirect to='/signin' />
+            </>
         );
-    }
+
+        if (auth && auth.refreshToken) {
+            content = (
+                <>
+                    <HeaderContainer />
+                    <PrivateRoute exact path='/projects' component={Dashboard} />
+                    <Redirect to='/projects' />
+                </>
+            )
+        }
+
+        return content;
+    }, [auth]);
+
+
+    return (
+        <ConnectedRouter history={history}>
+            <Suspense fallback={<Fallback />}>
+                <Switch>
+                    { routes }
+                </Switch>
+            </Suspense>
+        </ConnectedRouter>
+    );
 }
+
+export default MainRouter;
