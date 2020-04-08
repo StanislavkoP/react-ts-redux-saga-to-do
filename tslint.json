@@ -1,17 +1,24 @@
 {
     "defaultSeverity": "error",
     "extends": [
-        "tslint-react"
+        "tslint:latest",
+        "tslint-config-prettier"
     ],
     "jsRules": {
+        "whitespace": [true, "check-module"]
     },
     "rules": {
         "member-access": false,
         "ordered-imports": false,
         "quotemark": false,
         "no-console": false,
-        "semicolon": false,
-        "jsx-no-lambda": false
+        "semicolon": true,
+        "jsx-no-lambda": false,
+        "no-submodule-imports": false,
+        "no-implicit-dependencies": false,
+        "no-shadowed-variable": false,
+        "only-arrow-functions": false,
+        "whitespace": [true, "check-module"]
     },
     "rulesDirectory": [
     ],
