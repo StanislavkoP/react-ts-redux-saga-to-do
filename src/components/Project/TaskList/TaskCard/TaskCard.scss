@@ -1,0 +1,32 @@
+@import 'styles/mixins';
+
+.task-card  {
+  & .ant-list-item-action {
+    padding-left: 100px;
+
+    @include sm {
+      padding-left: 20px;
+    }
+  }
+
+}
+
+.task-card__form {
+  width: 100%;
+
+  .ant-form-item {
+    margin-bottom: 10px;
+  }
+}
+
+.task-card__form-desc {
+  border: none;
+}
+
+.task-card__spin-wrap {
+  width: 100%;
+}
+
+.task-card__select {
+  max-width: 200px;
+}
