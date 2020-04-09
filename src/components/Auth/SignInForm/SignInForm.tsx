@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Routes } from "constants/routes";
 import { Form, Input, Button, Space, Row } from 'antd';
 
 interface ILoginForm {
@@ -64,7 +65,7 @@ export function SignInForm({
             </Form.Item>
             <Form.Item>
                 <Row justify='center'>
-                    <NavLink className="login-form-forgot" to='/resetpass'>
+                    <NavLink className="login-form-forgot" to={Routes.RESET_PASS}>
                         <Button type='link' disabled={isLoading}>
                             Forgot password?
                         </Button>

@@ -1,14 +1,11 @@
 import React, { useContext } from 'react';
+import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
-import { message } from "antd";
-import { IUser } from "types/user";
-import { IAuth } from "types/auth";
-import { AuthActions } from 'redux/auth/actions';
-import { UserActions } from "redux/user/actions";
-import { useHistory } from "react-router-dom";
+import { Routes } from "constants/routes";
 import { AuthContextApi } from "contexts/authContextApi";
+import { message } from "antd";
 import { SignInForm } from "components/Auth/SignInForm/SignInForm";
 
 
@@ -74,7 +71,7 @@ export function SignInFormContainer({}) {
     }
 
     function onSignUp() {
-        history.push('/signup');
+        history.push(Routes.SIGN_UP);
     }
 
 

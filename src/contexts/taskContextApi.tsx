@@ -34,6 +34,7 @@ export class GlobalProviderTaskContextApi extends React.Component {
     }
 
     deleteTask(projectId: IProject['id'], id: IProject['id']): Promise<void> {
+        console.log(this.context)
         const ref = this.context.ref(`/projects/${projectId}/tasks/${id}`);
 
         return ref.remove();

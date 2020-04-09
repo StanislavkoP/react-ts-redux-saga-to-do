@@ -1,5 +1,6 @@
 import { push } from 'react-router-redux';
 import { put, takeEvery } from 'redux-saga/effects';
+import { Routes } from "constants/routes";
 import { AuthActions } from "../actions";
 import { ProjectsActions } from "../../projects/actions";
 import { UsersActions } from "../../users/actions";
@@ -10,7 +11,7 @@ function* changeRoute(route: string) {
 }
 
 function* authSuccess() {
-    yield changeRoute( '/');
+    yield changeRoute( Routes.PROJECTS);
     yield put(ProjectsActions.getProjects());
     yield put(UsersActions.getUsers());
 }

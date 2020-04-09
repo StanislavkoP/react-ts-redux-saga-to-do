@@ -2,6 +2,7 @@ import React, { useContext, useMemo } from 'react';
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
+import { Routes } from 'constants/routes';
 import { IProject, IProjectForm } from "types/project";
 import { useTypedSelector } from "redux/rootReducer";
 import { ProjectsActions } from "redux/projects/actions";
@@ -77,11 +78,15 @@ export function ProjectHeaderPage({
         formik.resetForm();
     }
 
+    function onBack() {
+        history.push(Routes.PROJECTS);
+    }
+
 
     return (
         <PageHeader
             className='project-page__header'
-            onBack={() => history.push('/')}
+            onBack={onBack}
             title={<Title className="project-page__page-id">{ `ID: ${ project.id }` }</Title>}
         >
             <Form className="project-page__form">

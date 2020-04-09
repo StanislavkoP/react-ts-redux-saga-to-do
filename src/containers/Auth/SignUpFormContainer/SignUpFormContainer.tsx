@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Routes } from "constants/routes";
 import { IUser } from 'types';
 import { UserActions } from "redux/user/actions";
 import { AuthActions } from 'redux/auth/actions';
@@ -96,7 +97,7 @@ export function SignUpFormContainer() {
     }
 
     function onSignIn() {
-        history.push('/signin');
+        history.push(Routes.SIGN_IN);
     }
 
 

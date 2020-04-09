@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { Routes } from "constants/routes";
 import { message } from "antd";
 import { ResetPasswordForm } from "components/Auth/ResetPasswordForm/ResetPasswordForm";
 import { AuthContextApi } from "contexts/authContextApi";
@@ -65,7 +66,7 @@ export function ResetPasswordFormContainer() {
     }
 
     function onSignIn() {
-        history.push('/signin');
+        history.push(Routes.SIGN_IN);
     }
 
     return (

@@ -12,6 +12,7 @@ import { GlobalProviderProjectContextApi } from "contexts/projectContextApi";
 import { GlobalProviderTaskContextApi } from "contexts/taskContextApi";
 import { GlobalProviderAuthContextApi } from "contexts/authContextApi";
 import { GlobalProviderUsersContextApi } from "contexts/usersContextApi";
+import { Routes } from "constants/routes";
 import { HeaderContainer } from "containers/HeaderContainer/HeaderContainer";
 import { SignIn } from "pages/Auth/SignIn/SignIn";
 import { SignUp } from "pages/Auth/SignUp/SignUp";
@@ -29,10 +30,10 @@ function MainRouter() {
     const routes = useMemo(() => {
         let content = (
             <Switch>
-                <Route path='/signin' component={SignIn} />
-                <Route path='/signup' component={SignUp} />
-                <Route path='/resetpass' component={ResetPassword} />
-                <Redirect to='/signin' />
+                <Route path={Routes.SIGN_IN} component={SignIn} />
+                <Route path={Routes.SIGN_UP} component={SignUp} />
+                <Route path={Routes.RESET_PASS} component={ResetPassword} />
+                <Redirect to={Routes.SIGN_IN} />
             </Switch>
         );
 
@@ -43,11 +44,11 @@ function MainRouter() {
                         <GlobalProviderProjectContextApi>
                             <GlobalProviderTaskContextApi>
                                 <GlobalProviderUsersContextApi>
-                                        <PrivateRoute exact path='/' component={Projects} />
-                                        <PrivateRoute path='/projects/:id' component={Project} />
-                                        <PrivateRoute path='/statistic' component={Statistic} />
-                                        <PrivateRoute path='/logout' component={LogOut} />
-                                        <Redirect to='/' />
+                                    <PrivateRoute exact path={Routes.PROJECTS} component={Projects} />
+                                    <PrivateRoute path={Routes.PROJECT} component={Project} />
+                                    <PrivateRoute path={Routes.STATISTIC} component={Statistic} />
+                                    <PrivateRoute path={Routes.LOG_OUT} component={LogOut} />
+                                    <Redirect to={Routes.PROJECTS} />
                                 </GlobalProviderUsersContextApi>
                             </GlobalProviderTaskContextApi>
                         </GlobalProviderProjectContextApi>

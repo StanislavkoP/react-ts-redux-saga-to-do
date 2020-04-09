@@ -1,8 +1,9 @@
 import React, { useContext, useMemo, useState } from 'react';
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
 import { IProject, IProjectForm } from "types/project";
-import { useDispatch } from "react-redux";
+import { Routes } from "constants/routes";
 import { ProjectsActions } from "redux/projects/actions";
 import { useTypedSelector } from "redux/rootReducer";
 import { projectValidationSchema } from "validationSchemas";
@@ -96,7 +97,7 @@ function ProjectCardContainerComp({
 
 
     function onOpenProject() {
-        history.push(`/projects/${id}`);
+        history.push(`${Routes.PROJECT_PUSH}/${id}`);
     }
 
     function onEditProject() {
