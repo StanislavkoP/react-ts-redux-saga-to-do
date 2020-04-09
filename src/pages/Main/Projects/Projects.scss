@@ -1,0 +1,20 @@
+.projects-page__header {
+  display: flex;
+  align-items: center;
+}
+
+.projects-page__header-title {
+  margin-bottom: 8px !important;
+}
+
+.projects-page__content {
+  position: relative;
+  margin-top: 18px;
+  height: 100%;
+}
+.projects-page__content-spin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+}
