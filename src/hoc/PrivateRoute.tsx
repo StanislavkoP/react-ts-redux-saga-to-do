@@ -9,17 +9,15 @@ interface IPrivateRoute {
     component: React.ComponentType<any>;
 }
 
-function PrivateRoute({ component: Component, ...otherProps }: IPrivateRoute) {
+export function PrivateRoute({ component: Component, ...otherProps }: IPrivateRoute) {
     const auth = useTypedSelector(state => state.authReducer);
 
     useEffect(() => {
         if(!auth || !auth.refreshToken) {
-            history.replace('/login')
+            history.replace('/signin')
         }
     }, [auth]);
 
 
     return <Route {...otherProps} render={(...props) => <Component {...props} />} />;
 }
-
-export default PrivateRoute;
