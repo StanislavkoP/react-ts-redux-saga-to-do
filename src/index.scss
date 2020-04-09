@@ -1,4 +1,22 @@
+@import 'styles/mixins';
 @import '~antd/dist/antd.css';
+
+// -------- Components
+@import 'components/Header/Header';
+@import 'components/common/Textarea/Textarea';
+@import 'components/Projects/ProjectCardListWithControls/ProjectCard/ProjectCard';
+@import 'components/Statistic/ProjectStatisticCardList/ProjectStatisticCard/ProjectStatisticCard';
+@import 'components/Project/TaskList/TaskList';
+@import 'components/Project/TaskList/TaskCard/TaskCard';
+
+// ------- Pages
+@import 'pages/Auth/ResetPassword/ResetPassword';
+@import 'pages/Auth/LogOut/LogOut';
+@import 'pages/Auth/SignIn/SignIn';
+@import 'pages/Auth/SignUp/SignUp';
+@import 'pages/Main/Projects/Projects.scss';
+@import 'pages/Main/Project/Project.scss';
+
 
 body {
   margin: 0;
@@ -11,5 +29,25 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
+}
+
+#root {
+  height: 100%;
+}
+
+.main-layout {
+  height: 100%;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 0 50px;
+  padding-top: 20px;
+  background-color: #fff;
+
+  @include md {
+    padding: 0 12px;
+    padding-top: 12px;
+  }
 }
