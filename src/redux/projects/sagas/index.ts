@@ -1,39 +1,37 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { put, takeEvery, call } from 'redux-saga/effects'
+import { put, takeEvery, call } from 'redux-saga/effects';
 import firebase from 'firebase';
 import { ProjectsActions } from "../actions";
-import {IProject} from "../../../types/project";
+import { IProject } from "types/project";
 
 
 
-function getProjectRequest() {
+function getProjectRequest(): {[key: string]: IProject} | {} {
 
     return firebase
-                .firestore()
-                .collection('projects')
-                .get()
-                .then(data => {
-
-                const projects = data.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id
-                }));
-
-                return projects;
-            });
+                .database()
+                .ref('projects')
+                .once('value')
+                .then(snapshot => snapshot && snapshot.val() ? snapshot.val() : {});
 
 }
 
 function* getProject() {
     yield put(ProjectsActions.getProjectsLoading());
-    const projects = yield call(getProjectRequest);
-    yield put(ProjectsActions.getProjectsSuccess(projects))
+
+    try {
+        const projects = yield call(getProjectRequest);
+        yield put(ProjectsActions.getProjectsSuccess(projects));
+
+    } catch (err) {
+        yield put(ProjectsActions.getProjects());
+    }
 
 
 }
 
 export function* watchGetProjects() {
-    yield takeEvery(ProjectsActions.Type["projects/getProjects"], getProject)
+    yield takeEvery(ProjectsActions.Type.GET_PROJECTS, getProject);
 }
 
 export const watchersGetProjects = [watchGetProjects()];

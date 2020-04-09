@@ -1,19 +1,32 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { createAction } from 'redux-actions';
-import { IProject } from "types/project";
+import { IProject, ITask } from "types/project";
 
 
 enum Type {
-    'projects/getProjects' = 'projects/getProjects',
-    'projects/getProjectsLoading' = 'projects/getProjectsLoading',
-    'projects/getProjectsSuccess' = 'projects/getProjectsSuccess',
-    'projects/getProjectsFailed' = 'projects/getProjectsFailed',
+    GET_PROJECTS = 'projects/getProjects',
+    GET_PROJECTS_LOADING = 'projects/getProjectsLoading',
+    GET_PROJECTS_SUCCESS = 'projects/getProjectsSuccess',
+    GET_PROJECTS_FAILED = 'projects/getProjectsFailed',
+
+    CLEAR_PROJECTS = 'projects/clearProjects',
+
+    CREATE_PROJECT = 'projects/createProject',
+    UPDATE_PROJECT = 'projects/updateProject',
+    DELETE_PROJECT = 'projects/deleteProject',
 }
 
-const getProjects = createAction(Type["projects/getProjects"]);
-const getProjectsLoading = createAction(Type["projects/getProjectsLoading"]);
-const getProjectsSuccess = createAction<Array<IProject>>(Type["projects/getProjectsSuccess"]);
-const getProjectsFailed = createAction(Type["projects/getProjectsFailed"]);
+const getProjects = createAction(Type.GET_PROJECTS);
+const getProjectsLoading = createAction(Type.GET_PROJECTS_LOADING);
+const getProjectsSuccess = createAction<{[key: string]: IProject}>(Type.GET_PROJECTS_SUCCESS);
+const getProjectsFailed = createAction(Type.GET_PROJECTS_FAILED);
+
+const createProject = createAction<IProject>(Type.CREATE_PROJECT);
+const updateProject = createAction<IProject>(Type.UPDATE_PROJECT);
+const deleteProject = createAction<IDeleteProject['payload']>(Type.DELETE_PROJECT);
+
+const clearProjects = createAction(Type.CLEAR_PROJECTS);
+
 
 export const ProjectsActions = {
     Type,
@@ -21,25 +34,53 @@ export const ProjectsActions = {
     getProjectsLoading,
     getProjectsSuccess,
     getProjectsFailed,
+
+    createProject,
+    updateProject,
+    deleteProject,
+
+    clearProjects
 };
 
 export interface IGetProjectsLoading {
-    type: "projects/getProjectsLoading";
+    type: Type.GET_PROJECTS;
 }
 
 export interface IGetProjectsFailed {
-    type: "projects/getProjectsFailed";
+    type: Type.GET_PROJECTS_FAILED;
     payload: string;
     isLoading: boolean;
 }
 
 export interface IGetProjectsSuccess {
-    type: "projects/getProjectsSuccess";
-    payload: Array<IProject>;
-    isLoading: boolean;
+    type: Type.GET_PROJECTS_SUCCESS;
+    payload: {[key: string]: IProject};
 }
 
-export type ProjectsActionsTypes = IGetProjectsLoading | IGetProjectsFailed | IGetProjectsSuccess;
+export interface ICreateProject {
+    type: Type.CREATE_PROJECT;
+    payload: IProject;
+}
+
+export interface IUpdateProject {
+    type: Type.UPDATE_PROJECT;
+    payload: IProject;
+}
+
+export interface IDeleteProject {
+    type: Type.DELETE_PROJECT;
+    payload: {
+        id: IProject['id']
+    };
+}
+
+export interface IClearProjects {
+    type: Type.CLEAR_PROJECTS;
+
+}
+
+
+export type ProjectsActionsTypes = IGetProjectsLoading | IGetProjectsFailed | IGetProjectsSuccess | ICreateProject | IUpdateProject | IDeleteProject | IClearProjects;
 
 export type ProjectsActions = Omit<typeof ProjectsActions, 'Type'>;
 
