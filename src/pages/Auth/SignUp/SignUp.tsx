@@ -1,13 +1,17 @@
-import React, {Component} from 'react';
-import SignUpFormContainer from "containers/SignUpFormContainer/SignUpFormContainer";
+import React, { Component } from 'react';
+import { SignUpFormContainer } from "containers/Auth/SignUpFormContainer/SignUpFormContainer";
+import { Col, Row } from "antd";
+import { Title } from "components/common/Title/Title";
 
 export class SignUp extends Component {
     render() {
         return (
-            <>
-                <p>Sign Up</p>
-                <SignUpFormContainer />
-            </>
+            <Row justify='center'>
+                <Col lg={12} sm={16} xs={24} xl={8}>
+                    <Title className='signup-page__title'>Sign Up</Title>
+                    <SignUpFormContainer />
+                </Col>
+            </Row>
         );
     }
 }
