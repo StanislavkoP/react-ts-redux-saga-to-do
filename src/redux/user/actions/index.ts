@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { createAction } from 'redux-actions';
-import { IUser } from 'types';
+import { IUser } from 'types/user';
 
 enum Type {
     SET_USER = 'user/setUser',

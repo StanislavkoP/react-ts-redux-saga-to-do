@@ -1,5 +1,5 @@
 import { UsersActions, UsersActionsTypes } from "./actions";
-import { IAssignedUser } from "types";
+import { IAssignedUser } from "types/user";
 
 export interface IUsersReducer {
     users: {

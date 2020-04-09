@@ -2,7 +2,7 @@ import React from 'react';
 import { useTypedSelector } from "redux/rootReducer";
 import { SelectValue } from "antd/es/select";
 import { Select } from "antd";
-import { IAssignedUser } from "types";
+import { IAssignedUser } from "types/user";
 
 const { Option } = Select;
 

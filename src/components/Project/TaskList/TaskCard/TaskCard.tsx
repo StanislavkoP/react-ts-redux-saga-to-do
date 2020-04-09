@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormikErrors, FormikValues } from "formik";
-import { IAssignedUser } from "types";
+import { IAssignedUser } from "types/user";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { LoadingOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, List, Spin } from "antd";

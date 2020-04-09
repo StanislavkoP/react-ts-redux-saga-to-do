@@ -5,7 +5,7 @@ import { useTypedSelector } from "redux/rootReducer";
 import { ProjectsActions } from "redux/projects/actions";
 import { taskValidationSchema } from "validationSchemas";
 import { IProject, ITask, ITaskForm } from "types/project";
-import { IAssignedUser } from "types";
+import { IAssignedUser } from "types/user";
 import { ProjectApi } from "Api/ProjectApi";
 import { TaskApi } from "Api/TaskApi";
 import { CheckboxChangeEvent } from "antd/es/checkbox";

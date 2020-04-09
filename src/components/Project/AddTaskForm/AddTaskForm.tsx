@@ -1,5 +1,5 @@
 import React from 'react';
-import { IAssignedUser } from "types";
+import { IAssignedUser } from "types/user";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { Button, Checkbox, Col, Form, Row } from "antd";
 import { UsersSelectContainer } from "containers/UsersSelectContainer/UsersSelectContainer";

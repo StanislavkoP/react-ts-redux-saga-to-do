@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
-import { IAssignedUser } from "types";
+import { IAssignedUser } from "types/user";
 import { IProject, ITaskForm } from "types/project";
 import { ProjectsActions } from "redux/projects/actions";
 import { useTypedSelector } from "redux/rootReducer";

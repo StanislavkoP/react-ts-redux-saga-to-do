@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { createAction } from 'redux-actions';
-import { IAssignedUser } from "types";
+import { IAssignedUser } from "types/user";
 
 
 enum Type {

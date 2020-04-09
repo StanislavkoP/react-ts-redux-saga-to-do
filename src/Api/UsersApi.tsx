@@ -1,5 +1,5 @@
 import firebase from "firebase";
-import { IAssignedUser } from "../types";
+import { IAssignedUser } from "types/user";
 
 export class UsersApi {
 

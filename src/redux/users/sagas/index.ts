@@ -2,7 +2,7 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import firebase from 'firebase';
 import { UsersActions } from "../actions";
-import { IAssignedUser } from "types";
+import { IAssignedUser } from "types/user";
 import { AuthActions } from "../../auth/actions";
 
 
