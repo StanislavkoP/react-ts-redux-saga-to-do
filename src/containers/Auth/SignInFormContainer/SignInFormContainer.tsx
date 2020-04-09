@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
-import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { Routes } from "constants/routes";
 import { AuthContextApi } from "contexts/authContextApi";
@@ -26,7 +25,6 @@ interface ISignInForm {
 }
 
 export function SignInFormContainer({}) {
-    const dispatch = useDispatch();
     const history = useHistory();
     const formik = useFormik<ISignInForm>({
         initialValues: {
@@ -41,7 +39,6 @@ export function SignInFormContainer({}) {
     const useAuthContextApi = useContext(AuthContextApi);
 
     async function onSignIn() {
-        const values = formik.values;
         const errors = await formik.validateForm();
         if (Object.keys(errors).length) {
             return;
