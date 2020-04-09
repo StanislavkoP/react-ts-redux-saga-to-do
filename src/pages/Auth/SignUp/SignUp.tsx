@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SignUpFormContainer } from "containers/Auth/SignUpFormContainer/SignUpFormContainer";
 import { Col, Row } from "antd";
-import { Title } from "components/common/Title/Title";
+import { Title } from "components/Common/Title/Title";
 
 export class SignUp extends Component {
     render() {

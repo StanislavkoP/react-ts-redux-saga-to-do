@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row } from "antd";
+import { Row } from "antd";
 import { ProjectCardContainer } from "containers/Projects/ProjectCardContainer/ProjectCardContainer";
 import { IProject } from "types/project";
 

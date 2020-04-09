@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ResetPasswordFormContainer } from "containers/Auth/ResetPasswordFormContainer/ResetPasswordFormContainer";
 import { Col, Row } from "antd";
-import { Title } from "components/common/Title/Title";
+import { Title } from "components/Common/Title/Title";
 
 export class ResetPassword extends Component {
     render() {

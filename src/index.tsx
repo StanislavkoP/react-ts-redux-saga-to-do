@@ -3,7 +3,6 @@ import * as serviceWorker from './serviceWorker';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import firebase from "firebase/app";
-import "firebase/auth";
 import store from 'redux/store';
 import { IUser } from "types/user";
 import { IAuth } from "types/auth";

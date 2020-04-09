@@ -6,7 +6,7 @@ import { history } from 'redux/store';
 import { useTypedSelector } from 'redux/rootReducer';
 import { PrivateRoute } from "hoc/PrivateRoute";
 import { Layout } from 'antd';
-import Fallback from 'components/common/fallback';
+import { Fallback } from "components/Common/Fallback/Fallback";
 import { GlobalProviderFirebaseDB } from "contexts/firebaseDatabaseContext";
 import { GlobalProviderProjectContextApi } from "contexts/projectContextApi";
 import { GlobalProviderTaskContextApi } from "contexts/taskContextApi";
@@ -16,13 +16,12 @@ import { HeaderContainer } from "containers/HeaderContainer/HeaderContainer";
 import { SignIn } from "pages/Auth/SignIn/SignIn";
 import { SignUp } from "pages/Auth/SignUp/SignUp";
 import { ResetPassword } from "pages/Auth/ResetPassword/ResetPassword";
-import { Projects } from "pages/Main/Projects/Projects";
-import { Project } from "pages/Main/Project/Project";
 import { LogOut } from "pages/Auth/LogOut/LogOut";
-import { Statistic } from "pages/Main/Statistic/Statistic";
 
 const { Content } = Layout;
-// const HomePage = React.lazy(() => import('pages/home'));
+const Projects = React.lazy(() => import('pages/Main/Projects/Projects'));
+const Project = React.lazy(() => import('pages/Main/Project/Project'));
+const Statistic = React.lazy(() => import('pages/Main/Statistic/Statistic'));
 
 function MainRouter() {
     const auth = useTypedSelector(state => state.authReducer);

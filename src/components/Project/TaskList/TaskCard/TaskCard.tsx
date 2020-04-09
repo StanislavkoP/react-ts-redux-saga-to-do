@@ -6,7 +6,7 @@ import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { LoadingOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, List, Spin } from "antd";
 import { UsersSelectContainer } from "containers/UsersSelectContainer/UsersSelectContainer";
-import { Textarea } from "components/common/Textarea/Textarea";
+import { Textarea } from "components/Common/Textarea/Textarea";
 
 const layout = {
     labelCol: { span: 5 },

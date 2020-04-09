@@ -4,9 +4,9 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Col, Row, Space, Spin } from "antd";
 import { ProjectListContainer } from "containers/Projects/ProjectListContainer/ProjectListContainer";
 import { ButtonCreateNewProject } from "containers/Projects/ButtonCreateNewProject/ButtonCreateNewProject";
-import { Title } from "components/common/Title/Title";
+import { Title } from "components/Common/Title/Title";
 
-export function Projects() {
+export default function Projects() {
     const isProjectsLoading = useTypedSelector(state => state.projectsReducer.isLoading);
 
     return (

@@ -4,7 +4,7 @@ import { IAssignedUser } from "types";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { Button, Checkbox, Col, Form, Row } from "antd";
 import { UsersSelectContainer } from "containers/UsersSelectContainer/UsersSelectContainer";
-import { Textarea } from "components/common/Textarea/Textarea";
+import { Textarea } from "components/Common/Textarea/Textarea";
 import { FormikErrors } from "formik";
 
 const layout = {

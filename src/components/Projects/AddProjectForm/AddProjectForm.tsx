@@ -2,7 +2,7 @@ import React from 'react';
 import { FormikErrors } from "formik";
 import { Button, Col, Form, Input, Row } from "antd";
 import { IProjectForm } from "types/project";
-import { Textarea } from "components/common/Textarea/Textarea";
+import { Textarea } from "components/Common/Textarea/Textarea";
 
 const layout = {
     labelCol: { span: 6 },

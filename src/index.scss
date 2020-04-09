@@ -2,8 +2,9 @@
 @import '~antd/dist/antd.css';
 
 // -------- Components
+@import 'components/Common/Fallback/Fallback';
 @import 'components/Header/Header';
-@import 'components/common/Textarea/Textarea';
+@import 'components/Common/Textarea/Textarea';
 @import 'components/Projects/ProjectCardListWithControls/ProjectCard/ProjectCard';
 @import 'components/Statistic/ProjectStatisticCardList/ProjectStatisticCard/ProjectStatisticCard';
 @import 'components/Project/TaskList/TaskList';

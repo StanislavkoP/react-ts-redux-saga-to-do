@@ -6,13 +6,13 @@ import { Spin, Space, Row, Col, Divider } from "antd";
 import { ButtonCreateTask } from "containers/Project/Task/ButtonCreateTask/ButtonCreateTask";
 import { ProjectHeaderPage } from "containers/Project/ProjectHeaderPage/ProjectHeaderPage";
 import { TaskListContainer } from "containers/Project/Task/TaskListContainer/TaskListContainer";
-import { Title } from "components/common/Title/Title";
+import { Title } from "components/Common/Title/Title";
 
 interface IPageParams {
     id: string;
 }
 
-export function Project() {
+export default function Project() {
     const isProjectsLoading = useTypedSelector(state => state.projectsReducer.isLoading);
     const pageParams = useParams<IPageParams>();
     const projectId = pageParams.id;

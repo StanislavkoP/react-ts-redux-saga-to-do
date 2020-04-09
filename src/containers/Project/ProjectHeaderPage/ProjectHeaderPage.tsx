@@ -8,8 +8,8 @@ import { ProjectsActions } from "redux/projects/actions";
 import { ProjectContextApi } from "contexts/projectContextApi";
 import { projectValidationSchema } from "validationSchemas";
 import { Form, Button, Descriptions, PageHeader, Space, message } from "antd";
-import { Textarea } from "components/common/Textarea/Textarea";
-import { Title } from "components/common/Title/Title";
+import { Textarea } from "components/Common/Textarea/Textarea";
+import { Title } from "components/Common/Title/Title";
 
 interface IHeaderPage {
     projectId: IProject['id'];

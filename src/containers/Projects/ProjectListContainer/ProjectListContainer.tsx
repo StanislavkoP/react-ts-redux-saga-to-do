@@ -6,9 +6,6 @@ export function ProjectListContainer() {
     const projectsIds = useTypedSelector(state => state.projectsReducer.projects.ids);
 
     return (
-        <>
-
-            <ProjectCardList projectsIds={projectsIds} />
-        </>
+        <ProjectCardList projectsIds={projectsIds} />
     );
 }

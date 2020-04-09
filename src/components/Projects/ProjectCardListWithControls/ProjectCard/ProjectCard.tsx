@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { IProject, IProjectForm } from "types/project";
 import { EditOutlined, DeleteOutlined, SelectOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Button, Card, Input, Form, Descriptions } from "antd";
-import { Textarea } from "components/common/Textarea/Textarea";
+import { Textarea } from "components/Common/Textarea/Textarea";
 import { FormikErrors } from "formik";
 
 const { Meta } = Card;
