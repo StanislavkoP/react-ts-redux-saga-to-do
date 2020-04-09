@@ -1,0 +1,24 @@
+@import 'styles/mixins';
+
+.main-header {
+  background-color: #fff;
+  border-bottom: 1px solid #f0f0f0;
+
+  @include md {
+    padding: 0 12px;
+  }
+}
+
+.main-header__menu {
+  display: flex;
+  justify-content: flex-end;
+  height: calc(100% - 2px);
+  border-bottom: none;
+}
+
+.main-header__user {
+  font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
