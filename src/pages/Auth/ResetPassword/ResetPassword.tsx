@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import ResetPasswordFormContainer from "containers/ResetPasswordFormContainer/ResetPasswordFormContainer";
+import { ResetPasswordFormContainer } from "containers/Auth/ResetPasswordFormContainer/ResetPasswordFormContainer";
+import { Col, Row } from "antd";
+import { Title } from "components/common/Title/Title";
 
 export class ResetPassword extends Component {
     render() {
         return (
-            <>
-                <p>Reset password</p>
-                <ResetPasswordFormContainer />
-            </>
+            <Row justify='center'>
+                <Col lg={12} sm={16} xs={24} xl={8}>
+                    <Title className='reset-pass-page__title'>Reset password</Title>
+                    <ResetPasswordFormContainer />
+                </Col>
+            </Row>
         );
     }
 }
