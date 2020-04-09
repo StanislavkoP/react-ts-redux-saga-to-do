@@ -6,4 +6,5 @@ const initialState = null;
 
 export const userReducer = handleActions<IUser | null>({
     [UserActions.Type.SET_USER]: (state, action) => action.payload,
+    [UserActions.Type.CLEAR_USER]: () => initialState,
 }, initialState);
