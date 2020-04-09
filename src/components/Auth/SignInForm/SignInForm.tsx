@@ -2,17 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Routes } from "constants/routes";
 import { Form, Input, Button, Space, Row } from 'antd';
+import { FormikErrors, FormikValues } from "formik";
 
 interface ILoginForm {
-    errors: {
-        email?: string;
-        password?: string;
-        confirmPassword?: string;
-    };
-    values: {
-        email: string,
-        password: string
-    };
+    errors: FormikErrors<FormikValues>;
+    values: FormikValues;
     isLoading: boolean;
     handleField: (e: React.ChangeEvent) => void;
     onSignIn: () => void;

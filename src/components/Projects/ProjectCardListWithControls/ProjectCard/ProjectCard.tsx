@@ -1,17 +1,17 @@
 import React, { useMemo } from 'react';
-import { IProject, IProjectForm } from "types/project";
+import { IProject } from "types/project";
 import { EditOutlined, DeleteOutlined, SelectOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Button, Card, Input, Form, Descriptions } from "antd";
 import { Textarea } from "components/Common/Textarea/Textarea";
-import { FormikErrors } from "formik";
+import { FormikErrors, FormikValues } from "formik";
 
 const { Meta } = Card;
 
 
 interface IProjectCardListWithControls {
     id: IProject['id'];
-    values: IProjectForm;
-    errors: FormikErrors<IProjectForm>;
+    values: FormikValues;
+    errors: FormikErrors<FormikValues>;
     isEditing: boolean;
     isValid: boolean;
     onOpenProject: () => void;

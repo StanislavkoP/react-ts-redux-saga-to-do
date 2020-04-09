@@ -11,7 +11,7 @@ function* changeRoute(route: string) {
 }
 
 function* authSuccess() {
-    yield changeRoute( Routes.PROJECTS);
+    yield changeRoute(Routes.PROJECTS);
     yield put(ProjectsActions.getProjects());
     yield put(UsersActions.getUsers());
 }

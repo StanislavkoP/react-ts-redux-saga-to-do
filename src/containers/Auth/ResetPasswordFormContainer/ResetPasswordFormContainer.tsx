@@ -1,19 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Routes } from "constants/routes";
+import { AuthApi } from "Api/AuthApi";
 import { message } from "antd";
 import { ResetPasswordForm } from "components/Auth/ResetPasswordForm/ResetPasswordForm";
-import { AuthContextApi } from "contexts/authContextApi";
 
 const schemaValidation = Yup.object().shape({
     email: Yup.string()
         .email('Invalid email')
-        .required('Required field'),
-    password: Yup.string()
-        .min(6, 'Min length is 6')
-        .max(16, 'Max length is 16')
         .required('Required field'),
 });
 
@@ -30,8 +26,6 @@ export function ResetPasswordFormContainer() {
         validationSchema: schemaValidation,
         onSubmit: () => {}
     });
-    const useAuthContextApi = useContext(AuthContextApi);
-
 
     async function onReset() {
         const values = formik.values;
@@ -41,8 +35,8 @@ export function ResetPasswordFormContainer() {
         }
 
         formik.setSubmitting(true);
-        
-        useAuthContextApi?.resetPassword(values.email)
+
+        AuthApi.resetPassword(values.email)
             .then(() => {
                 message.success({
                     content: 'Check your mail for changing password',
@@ -71,6 +65,7 @@ export function ResetPasswordFormContainer() {
 
     return (
         <ResetPasswordForm
+            errors={formik.errors}
             values={formik.values}
             isLoading={formik.isSubmitting}
             handleField={formik.handleChange}

@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useDispatch } from "react-redux";
 import { useFormik } from 'formik';
 import { IProjectForm } from "types/project";
 import { ProjectsActions } from "redux/projects/actions";
 import { projectValidationSchema } from "validationSchemas";
-import { ProjectContextApi } from "contexts/projectContextApi";
+import { ProjectApi } from "Api/ProjectApi";
 import { message } from "antd";
 import { AddProjectForm } from "components/Projects/AddProjectForm/AddProjectForm";
 
@@ -23,9 +23,6 @@ export function AddProjectFormContainer({ onOpenModal }: IAddProjectFormContaine
         validationSchema: projectValidationSchema,
         onSubmit: () => {}
     });
-    const useProjectApiCtx = useContext(ProjectContextApi);
-
-
 
     async function onCreateProject() {
         const values = formik.values;
@@ -43,7 +40,7 @@ export function AddProjectFormContainer({ onOpenModal }: IAddProjectFormContaine
             tasks: {},
         };
 
-        useProjectApiCtx?.createProject(newProjectData)
+        ProjectApi.createProject(newProjectData)
             .then((project) => {
                 dispatch(ProjectsActions.createProject(project));
 

@@ -1,7 +1,6 @@
 import React from 'react';
-import { FormikErrors } from "formik";
+import { FormikErrors, FormikValues } from "formik";
 import { Button, Col, Form, Input, Row } from "antd";
-import { IProjectForm } from "types/project";
 import { Textarea } from "components/Common/Textarea/Textarea";
 
 const layout = {
@@ -11,8 +10,8 @@ const layout = {
 
 interface IAddProjectForm {
     isSubmitting: boolean;
-    values: IProjectForm;
-    errors: FormikErrors<IProjectForm>;
+    values: FormikValues;
+    errors: FormikErrors<FormikValues>;
     onSubmit: () => void;
     onChangeField: (e: React.ChangeEvent) => void;
     onCancel: () => void;

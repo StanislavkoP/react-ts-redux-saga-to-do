@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { useTypedSelector } from "redux/rootReducer";
@@ -6,8 +6,8 @@ import { ProjectsActions } from "redux/projects/actions";
 import { taskValidationSchema } from "validationSchemas";
 import { IProject, ITask, ITaskForm } from "types/project";
 import { IAssignedUser } from "types";
-import { ProjectContextApi } from "contexts/projectContextApi";
-import { TaskContextApi } from "contexts/taskContextApi";
+import { ProjectApi } from "Api/ProjectApi";
+import { TaskApi } from "Api/TaskApi";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { message } from "antd";
 import { TaskCard } from "components/Project/TaskList/TaskCard/TaskCard";
@@ -32,9 +32,6 @@ export function TaskCardContainer({ id, projectId }: ITaskCardContainer) {
         onSubmit: () => {}
     });
     const dispatch = useDispatch();
-    const useProjectApiCtx = useContext(ProjectContextApi);
-    const useTaskApiCtx = useContext(TaskContextApi);
-
 
     async function onUpdateTask() {
         const values = formik.values;
@@ -51,9 +48,9 @@ export function TaskCardContainer({ id, projectId }: ITaskCardContainer) {
             assigned: values.assigned ? users[values.assigned] : null
         };
 
-        useTaskApiCtx?.updateTask(projectId, updatedTask)
+        TaskApi.updateTask(projectId, updatedTask)
             .then(async () => {
-                const projectRes = await useProjectApiCtx?.getProject(projectId);
+                const projectRes = await ProjectApi.getProject(projectId);
                 const project: IProject = projectRes && projectRes.val();
                 const updatedProject: IProject = project;
                 const isCompletedFieldChanged = formik.initialValues.completed !== formik.values.completed;
@@ -63,7 +60,7 @@ export function TaskCardContainer({ id, projectId }: ITaskCardContainer) {
 
                 }
 
-                await useProjectApiCtx?.updateProject(updatedProject);
+                await ProjectApi.updateProject(updatedProject);
 
                 dispatch(ProjectsActions.updateProject(updatedProject));
 
@@ -87,15 +84,15 @@ export function TaskCardContainer({ id, projectId }: ITaskCardContainer) {
     function onDelete() {
         formik.setSubmitting(true);
 
-        useTaskApiCtx?.deleteTask(projectId, id)
+        TaskApi.deleteTask(projectId, id)
             .then(async () => {
-                const projectRes = await useProjectApiCtx?.getProject(projectId);
+                const projectRes = await ProjectApi.getProject(projectId);
                 const project: IProject = projectRes && projectRes.val();
                 const updatedProject: IProject = project;
                 updatedProject.tasksCount = project.tasksCount - 1;
                 updatedProject.completedCount = formik.values.completed ? project.completedCount - 1 : project.completedCount;
 
-                await useProjectApiCtx?.updateProject(updatedProject);
+                await ProjectApi.updateProject(updatedProject);
 
                 dispatch(ProjectsActions.updateProject(updatedProject));
 

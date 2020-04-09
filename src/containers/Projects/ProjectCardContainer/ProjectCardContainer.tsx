@@ -1,16 +1,16 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
 import { IProject, IProjectForm } from "types/project";
 import { Routes } from "constants/routes";
+import { ProjectApi } from "Api/ProjectApi";
 import { ProjectsActions } from "redux/projects/actions";
 import { useTypedSelector } from "redux/rootReducer";
 import { projectValidationSchema } from "validationSchemas";
 import { LoadingOutlined } from '@ant-design/icons';
 import { Col, message, Spin } from "antd";
 import { ProjectCard } from "components/Projects/ProjectCardListWithControls/ProjectCard/ProjectCard";
-import { ProjectContextApi } from "contexts/projectContextApi";
 
 
 interface IProjectCardContainer {
@@ -33,7 +33,6 @@ function ProjectCardContainerComp({
     });
     const history = useHistory();
     const dispatch = useDispatch();
-    const useProjectApiCtx = useContext(ProjectContextApi);
 
     async function onSaveChanges() {
         const values = formik.values;
@@ -56,7 +55,7 @@ function ProjectCardContainerComp({
             description: values.description
         };
 
-        useProjectApiCtx?.updateProject(newProjectData)
+        ProjectApi.updateProject(newProjectData)
             .then(() => {
                 dispatch(ProjectsActions.updateProject(newProjectData));
                 message.success('You updated the project successfully');
@@ -78,7 +77,7 @@ function ProjectCardContainerComp({
     function onDeleteProject() {
         formik.setSubmitting(true);
 
-        useProjectApiCtx?.deleteProject(id)
+        ProjectApi.deleteProject(id)
             .then(() => {
                 dispatch(ProjectsActions.deleteProject({ id }));
                 message.success('You deleted project successfully');
@@ -131,4 +130,4 @@ function ProjectCardContainerComp({
     );
 }
 
-export const ProjectCardContainer = React.memo(ProjectCardContainerComp, () => true);
+export const ProjectCardContainer = React.memo(ProjectCardContainerComp);

@@ -7,11 +7,6 @@ import { useTypedSelector } from 'redux/rootReducer';
 import { PrivateRoute } from "hoc/PrivateRoute";
 import { Layout } from 'antd';
 import { Fallback } from "components/Common/Fallback/Fallback";
-import { GlobalProviderFirebaseDB } from "contexts/firebaseDatabaseContext";
-import { GlobalProviderProjectContextApi } from "contexts/projectContextApi";
-import { GlobalProviderTaskContextApi } from "contexts/taskContextApi";
-import { GlobalProviderAuthContextApi } from "contexts/authContextApi";
-import { GlobalProviderUsersContextApi } from "contexts/usersContextApi";
 import { Routes } from "constants/routes";
 import { HeaderContainer } from "containers/HeaderContainer/HeaderContainer";
 import { SignIn } from "pages/Auth/SignIn/SignIn";
@@ -40,19 +35,11 @@ function MainRouter() {
         if (auth && auth.refreshToken) {
             content = (
                 <Switch>
-                    <GlobalProviderFirebaseDB>
-                        <GlobalProviderProjectContextApi>
-                            <GlobalProviderTaskContextApi>
-                                <GlobalProviderUsersContextApi>
-                                    <PrivateRoute exact path={Routes.PROJECTS} component={Projects} />
-                                    <PrivateRoute path={Routes.PROJECT} component={Project} />
-                                    <PrivateRoute path={Routes.STATISTIC} component={Statistic} />
-                                    <PrivateRoute path={Routes.LOG_OUT} component={LogOut} />
-                                    <Redirect to={Routes.PROJECTS} />
-                                </GlobalProviderUsersContextApi>
-                            </GlobalProviderTaskContextApi>
-                        </GlobalProviderProjectContextApi>
-                    </GlobalProviderFirebaseDB>
+                    <PrivateRoute exact path={Routes.PROJECTS} component={Projects} />
+                    <PrivateRoute path={Routes.PROJECT} component={Project} />
+                    <PrivateRoute path={Routes.STATISTIC} component={Statistic} />
+                    <PrivateRoute path={Routes.LOG_OUT} component={LogOut} />
+                    <Redirect to={Routes.PROJECTS} />
                 </Switch>
             );
         }
@@ -67,9 +54,7 @@ function MainRouter() {
                     <HeaderContainer />
                     <Content className="main-content">
                         <Suspense fallback={<Fallback />}>
-                            <GlobalProviderAuthContextApi>
                                 { routes }
-                            </GlobalProviderAuthContextApi>
                         </Suspense>
                     </Content>
                 </Layout>

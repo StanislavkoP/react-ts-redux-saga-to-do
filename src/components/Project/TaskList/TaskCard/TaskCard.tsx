@@ -1,7 +1,6 @@
 import React from 'react';
-import { FormikErrors } from "formik";
+import { FormikErrors, FormikValues } from "formik";
 import { IAssignedUser } from "types";
-import { ITaskForm } from "types/project";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { LoadingOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, List, Spin } from "antd";
@@ -15,8 +14,8 @@ const layout = {
 
 
 interface ITaskCard {
-    values: ITaskForm;
-    errors: FormikErrors<ITaskForm>;
+    values: FormikValues;
+    errors: FormikErrors<FormikValues>;
     isDirty: boolean;
     isLoading: boolean;
     isValid: boolean;

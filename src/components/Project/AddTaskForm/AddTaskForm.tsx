@@ -1,11 +1,10 @@
 import React from 'react';
-import { ITaskForm } from "types/project";
 import { IAssignedUser } from "types";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { Button, Checkbox, Col, Form, Row } from "antd";
 import { UsersSelectContainer } from "containers/UsersSelectContainer/UsersSelectContainer";
 import { Textarea } from "components/Common/Textarea/Textarea";
-import { FormikErrors } from "formik";
+import { FormikErrors, FormikValues } from "formik";
 
 const layout = {
     labelCol: { span: 6 },
@@ -13,8 +12,8 @@ const layout = {
 };
 
 interface INewTaskForm {
-    errors: FormikErrors<ITaskForm>;
-    values: ITaskForm;
+    errors: FormikErrors<FormikValues>;
+    values: FormikValues;
     isDirty: boolean;
     isValid: boolean;
     isSubmitting: boolean;

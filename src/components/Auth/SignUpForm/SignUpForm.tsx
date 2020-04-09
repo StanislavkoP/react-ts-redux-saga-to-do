@@ -1,17 +1,10 @@
 import React  from 'react';
 import { Form, Input, Button, Space, Row } from 'antd';
+import { FormikErrors, FormikValues } from "formik";
 
 interface ISignUpForm {
-    errors: {
-        email?: string;
-        password?: string;
-        confirmPassword?: string;
-    };
-    values: {
-        email: string,
-        password: string,
-        confirmPassword: string
-    };
+    errors: FormikErrors<FormikValues>;
+    values: FormikValues;
     isLoading: boolean;
     handleField: (e: React.ChangeEvent) => void;
     onSignIn: () => void;

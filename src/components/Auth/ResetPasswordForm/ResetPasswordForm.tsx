@@ -1,10 +1,10 @@
 import React from 'react';
 import { Form, Input, Button, Row, Space } from 'antd';
+import { FormikErrors, FormikValues } from "formik";
 
 interface IResetPasswordForm {
-    values: {
-        email: string,
-    };
+    values: FormikValues;
+    errors: FormikErrors<FormikValues>;
     isLoading: boolean;
     handleField: (e: React.ChangeEvent) => void;
     onReset: () => void;
@@ -18,6 +18,7 @@ const layout = {
 
 export function ResetPasswordForm({
    values,
+   errors,
    isLoading,
    handleField,
     onReset,
@@ -28,6 +29,9 @@ export function ResetPasswordForm({
             <Form {...layout}>
                 <Form.Item
                     label="Email"
+                    validateStatus={errors.email ? "error" : undefined}
+                    help={errors.email}
+
                 >
                     <Input
                         type="email"

@@ -1,16 +1,12 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { AuthApi } from "Api/AuthApi";
+import { UsersApi } from "Api/UsersApi";
 import { Routes } from "constants/routes";
-import { IUser } from 'types';
-import { UserActions } from "redux/user/actions";
-import { AuthActions } from 'redux/auth/actions';
 import { message } from "antd";
 import { SignUpForm } from "components/Auth/SignUpForm/SignUpForm";
-import { AuthContextApi } from "contexts/authContextApi";
-import { UsersContextApi } from "contexts/usersContextApi";
 
 const schemaValidation = Yup.object().shape({
     email: Yup.string()
@@ -38,7 +34,6 @@ interface ISignUpForm {
 }
 
 export function SignUpFormContainer() {
-    const dispatch = useDispatch();
     const history = useHistory();
     const formik = useFormik<ISignUpForm>({
         initialValues: {
@@ -51,8 +46,6 @@ export function SignUpFormContainer() {
         validationSchema: schemaValidation,
         onSubmit: () => {},
     });
-    const useAuthContextApi = useContext(AuthContextApi);
-    const useUsersContextApi = useContext(UsersContextApi);
 
     async function onSignUp() {
         const values = formik.values;
@@ -63,20 +56,14 @@ export function SignUpFormContainer() {
 
         formik.setSubmitting(true);
 
-        useAuthContextApi?.registration(values.email, values.password)
+        AuthApi.registration(values.email, values.password)
             .then(async (data) => {
                 const user = {
                     id: data.user!.uid,
                     email: values.email,
                 };
-                await useUsersContextApi?.addUser(user);
+                await UsersApi.addUser(user);
 
-                const userData: IUser= {
-                    email: values.email,
-                };
-                dispatch(UserActions.setUser(userData));
-                dispatch(AuthActions.authSuccess());
-                
                 message.success('You signed up successfully');
             })
             .catch((error) => {

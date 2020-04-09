@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { IAssignedUser } from "types";
@@ -6,12 +6,11 @@ import { IProject, ITaskForm } from "types/project";
 import { ProjectsActions } from "redux/projects/actions";
 import { useTypedSelector } from "redux/rootReducer";
 import { taskValidationSchema } from "validationSchemas";
-import { ProjectContextApi } from "contexts/projectContextApi";
-import { TaskContextApi } from "contexts/taskContextApi";
+import { ProjectApi } from "Api/ProjectApi";
+import { TaskApi } from "Api/TaskApi";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { message } from "antd";
 import { AddTaskForm } from "components/Project/AddTaskForm/AddTaskForm";
-
 
 interface IAddTaskFormContainer {
     projectId: string;
@@ -30,9 +29,6 @@ export function AddTaskFormContainer({ projectId, onOpenModal }: IAddTaskFormCon
         onSubmit: () => {}
     });
     const dispatch = useDispatch();
-    const useTaskApiCtx = useContext(TaskContextApi);
-    const useProjectApiCtx = useContext(ProjectContextApi);
-
 
 
     async function onCreateTask() {
@@ -44,20 +40,24 @@ export function AddTaskFormContainer({ projectId, onOpenModal }: IAddTaskFormCon
 
         formik.setSubmitting(true);
 
+        console.log(values.assigned)
+        console.log(values.assigned &&  users[values.assigned])
+
         const newTask = {
             ...values,
             assigned: values.assigned ? users[values.assigned] : null
         };
 
-        useTaskApiCtx?.createTask(projectId, newTask)
+        TaskApi.createTask(projectId, newTask)
             .then(async () => {
-                const projectRes = await useProjectApiCtx?.getProject(projectId);
+                const projectRes = await ProjectApi.getProject(projectId);
                 const project: IProject = projectRes && projectRes.val();
+
                 const updatedProject: IProject = project;
                 updatedProject.tasksCount = project.tasksCount + 1;
                 updatedProject.completedCount = values.completed ? project.completedCount + 1 : project.completedCount;
 
-                await useProjectApiCtx?.updateProject(updatedProject);
+                await ProjectApi.updateProject(updatedProject);
 
                 dispatch(ProjectsActions.updateProject(updatedProject));
 
@@ -93,8 +93,6 @@ export function AddTaskFormContainer({ projectId, onOpenModal }: IAddTaskFormCon
         formik.setFieldValue('assigned', user ? user.id : null);
 
     }
-
-
 
     return (
         <AddTaskForm

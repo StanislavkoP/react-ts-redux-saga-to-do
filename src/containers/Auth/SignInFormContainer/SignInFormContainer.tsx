@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React  from 'react';
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import { useFormik } from 'formik';
 import { Routes } from "constants/routes";
-import { AuthContextApi } from "contexts/authContextApi";
+import { AuthApi } from "Api/AuthApi";
 import { message } from "antd";
 import { SignInForm } from "components/Auth/SignInForm/SignInForm";
 
@@ -36,7 +36,6 @@ export function SignInFormContainer({}) {
         validationSchema: schemaValidation,
         onSubmit: () => {}
     });
-    const useAuthContextApi = useContext(AuthContextApi);
 
     async function onSignIn() {
         const errors = await formik.validateForm();
@@ -46,7 +45,7 @@ export function SignInFormContainer({}) {
 
         formik.setSubmitting(true);
 
-        useAuthContextApi?.logIn(formik.values.email, formik.values.password)
+        AuthApi.logIn(formik.values.email, formik.values.password)
             .then(() => {
                 message.success('You signed in successfully');
             })

@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
@@ -6,12 +6,11 @@ import { Routes } from 'constants/routes';
 import { IProject, IProjectForm } from "types/project";
 import { useTypedSelector } from "redux/rootReducer";
 import { ProjectsActions } from "redux/projects/actions";
-import { ProjectContextApi } from "contexts/projectContextApi";
 import { projectValidationSchema } from "validationSchemas";
+import { ProjectApi } from "Api/ProjectApi";
 import { Form, Button, Descriptions, PageHeader, Space, message } from "antd";
 import { Textarea } from "components/Common/Textarea/Textarea";
 import { Title } from "components/Common/Title/Title";
-
 interface IHeaderPage {
     projectId: IProject['id'];
 }
@@ -32,7 +31,6 @@ export function ProjectHeaderPage({
     });
     const history = useHistory();
     const dispatch = useDispatch();
-    const useProjectApiCtx = useContext(ProjectContextApi);
 
     async function onUpdateProject() {
         const values = formik.values;
@@ -55,7 +53,7 @@ export function ProjectHeaderPage({
             description: values.description
         };
 
-        useProjectApiCtx?.updateProject(newProjectData)
+        ProjectApi.updateProject(newProjectData)
             .then(() => {
                 dispatch(ProjectsActions.updateProject(newProjectData));
                 message.success('You updated the project successfully');
